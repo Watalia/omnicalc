@@ -1,23 +1,43 @@
+
 class CalculationsController < ApplicationController
 
   def word_count
     @text = params[:user_text]
     @special_word = params[:user_word]
 
-    # ================================================================================
-    # Your code goes below.
-    # The text the user input is in the string @text.
-    # The special word the user input is in the string @special_word.
-    # ================================================================================
+    # This is the code to count character with spaces
 
+    @character_count_with_spaces = @text.length
 
-    @character_count_with_spaces = "Replace this string with your answer."
+    i=0
+    space_counter=0
+    while i != @text.length
+      if @text[i] ==" "
+      space_counter=space_counter+1
+      end
+      i=i+1
+    end
 
-    @character_count_without_spaces = "Replace this string with your answer."
+    @character_count_without_spaces = @text.length - space_counter
 
-    @word_count = "Replace this string with your answer."
+    ## This is the code for word count
 
-    @occurrences = "Replace this string with your answer."
+    @word_count = @text.split.length
+
+    ## This is the code to count for the same word
+
+    special_counter=0
+    k=0
+
+    while k!= @text.split.length
+
+      if @special_word.downcase == @text.split[k].downcase
+        special_counter=special_counter+1
+      end
+      k=k+1
+    end
+
+    @occurrences = special_counter
 
     # ================================================================================
     # Your code goes above.
