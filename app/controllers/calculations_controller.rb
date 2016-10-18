@@ -58,7 +58,12 @@ class CalculationsController < ApplicationController
     # The principal value the user input is in the decimal @principal.
     # ================================================================================
 
-    @monthly_payment = "Replace this string with your answer."
+    new_interest_rate = @apr/1200
+    months=@years*12
+    numerator=new_interest_rate*@principal
+    denominator=1-(1+new_interest_rate)**(-months)
+
+    @monthly_payment = numerator/denominator
 
     # ================================================================================
     # Your code goes above.
@@ -86,7 +91,7 @@ class CalculationsController < ApplicationController
     @hours = @minutes/60
     @days = @hours/24
     @weeks = @days/7
-    @years = @days/365
+    @years = @days/365.25
 
     # ================================================================================
     # Your code goes above.
@@ -129,15 +134,16 @@ class CalculationsController < ApplicationController
 
     @mean = @sum/@numbers.length
 
+    ##  Varianza
     l=0
+    sum_of_squares=0
     while l != @numbers.length
-      @numbers[0]
-
+      sum_of_squares=sum_of_squares+(@numbers[l]-@mean)**2
+      l=l+1
     end
+    @variance = sum_of_squares/@numbers.length
 
-    @variance =
-
-    @standard_deviation = "Replace this string with your answer."
+    @standard_deviation = Math.sqrt(@variance)
 
     @mode = "Replace this string with your answer."
 
