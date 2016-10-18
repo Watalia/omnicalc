@@ -145,7 +145,19 @@ class CalculationsController < ApplicationController
 
     @standard_deviation = Math.sqrt(@variance)
 
-    @mode = "Replace this string with your answer."
+    leader = nil
+    leader_count = 0
+
+    @numbers.each do |num|
+      occurrences = @numbers.count(num)
+      if occurrences > leader_count
+        leader = num
+        leader_count = occurrences
+      end
+    end
+
+    @mode = leader
+  
 
     # ================================================================================
     # Your code goes above.
